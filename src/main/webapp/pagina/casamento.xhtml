@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/modelo/modelo.xhtml">
+	<ui:define name="centro">
+	
+	<h:form  id="formCadastro"  >
+		<p:panel id="pn" header="Casamento" class="menus">
+			<p:panelGrid columns="2"    >
+			
+				 		   <p:outputLabel value="Noivo:" for="noivo" styleClass="menus"/>
+					<p:inputText id="noivo"  title="digite o nome do usuário"   
+						value="#{casamentoBean.casamento.nome}"   placeholder="Digite o nome do noivo" size="40" maxlength="40" required="true" requiredMessage="O Campo 'Nome' é obrigatório"/>
+				 
+				 
+				  <p:outputLabel for="responsavel" value="Responsável:" styleClass="menus"/>
+					<p:selectOneMenu id="responsavel" filter="true"	value="#{casamentoBean.casamento.cliente}" 									
+					converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="O campo 'Pessoa' é obrigatório">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione uma Pessoa" />
+						<f:selectItems value="#{clienteBean.clientes}" var="pessoa"
+							itemValue="#{pessoa}" itemLabel="#{pessoa.nome}" />
+					</p:selectOneMenu>
+				 
+			 
+		
+				  
+				 <p:outputLabel for="status" value="Status:" />
+					<p:selectOneRadio id="status"
+						value="#{casamentoBean.casamento.status}" required="true"
+						requiredMessage="O campo 'Status' obrigatório">
+						<f:selectItem itemValue="ABERTO" itemLabel="aberto" />
+						<f:selectItem itemValue="PENDENTE" itemLabel="pendente" />
+						<f:selectItem itemValue="CONCLUIDO" itemLabel="concluido" />
+					</p:selectOneRadio>
+
+				 
+				
+				
+					 
+				
+				<p:outputLabel value="Descrição:" for="des" styleClass="menus"/>
+				<p:inputTextarea id="des"  value="#{casamentoBean.casamento.descricao}"    autoResize="60" rows="5" cols="50"   required="true" requiredMessage="O Campo 'Descrição' é obrigatório">
+				</p:inputTextarea>
+				
+				<p:outputLabel value="Data Casamento:" for="dc" styleClass="menus"/>
+				<p:calendar id="dc" value="#{casamentoBean.casamento.dataCasamento}" required="true" requiredMessage="O Campo 'Data  '  é Obrigatório "   size="20" pattern="MM/dd/yyyy HH:mm"  > 
+			 
+				</p:calendar>
+				 
+				 
+				  <p:outputLabel value="Total: "  for="total" styleClass="menus"/>
+				<p:inputNumber id="total"  value="#{casamentoBean.casamento.valor}" size="9" symbol=" R$"  symbolPosition="s" required="true" requiredMessage="o valor é Obrigatório">
+				 </p:inputNumber>
+				<p:commandButton value="Salvar " title="Salvar  "
+					actionListener="#{casamentoBean.salvar}"    update=":mensagem :formCadastro"/>
+			</p:panelGrid>
+		</p:panel>
+		 
+</h:form>
+
+	</ui:define>
+
+	 
+</ui:composition>

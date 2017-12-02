@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+
+.menus{
+   color:#4554ba;
+}
+
+.sistema{
+	color: #804000;
+	
+text-align: justify;
+	
+}
+.h1{
+	color: green;
+ 
+	 
+	 text-align: center;
+	
+	
+}
+.div{
+	  color:red;
+	  margin: 50px;
+	  text-align: right;
+	  
+ 
+}
+
+
+.borda{
+	background-color: #808080;
+	 border-bottom-color: #ff8040;
+}
+	 
+
+ 
+.Geral{
+	background:red;
+	background-color:#c0c0c0;
+	 text-align:justify;
+		  
+    color: red;
+}
+.centralizada{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+}
+.cor{
+	text-align: left;
+	 
+	
+	
+}
+.Topo{
+	padding-bottom: 10px;
+	background-color: arm
+	 
+}
+.Cabecalho{
+	padding-bottom: 10px
+		 
+}
+.ui-widget, .ui-widget .ui-widget {
+font-size: 100% !important;
+max-width: 100%;
+}
+.inativo{
+	background-color:red;  
+    color: #ffffff;
+}
+ #login{
+  
+ position :absolute;
+ top : 32%;
+ left: 31%;
+  
+}

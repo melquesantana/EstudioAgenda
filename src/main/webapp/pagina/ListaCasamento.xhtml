@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/modelo/modelo.xhtml">
+    
+	<ui:define name="centro">
+	
+	 <h:form id="formListagem">
+	 
+	 <p:panel header="Lista de Casamento:" >
+		<p:dataTable id="tabela" value="#{casamentoBean.casamentos}"   var="casamento"   style="text-align: center"
+			emptyMessage="Nenhum Cliente de casamento Econtrado" rows="3" paginator="true">
+			
+					<f:facet name="header">
+            <h:commandLink>
+                <p:graphicImage library="imagens" name="pdf.png" width="24" title="Relatório PDF" />
+                <p:dataExporter type="pdf" target="tabela" fileName="Clientes" encoding="ISO-8859-1" />
+            </h:commandLink>
+            <h:commandLink>
+                <p:graphicImage  library="imagens" name="excel.png" width="24" title="Relatório EXCEL"/>
+                <p:dataExporter type="xls" target="tabela" fileName="Clientes" encoding="ISO-8859-1" />
+            </h:commandLink>
+            </f:facet>
+            
+            <f:facet name="footer">
+					<p:commandButton value="Cadastrar Casamento" title="novo Casamento"  icon="ui-icon-plus"
+					action="#{casamentoBean.pagina}"
+					update=":mensagem :formCadastro:painel" >
+					<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+				 
+				</f:facet>
+
+			<p:column headerText="Nome:" sortBy="#{casamento.nome}" styleClass="menus"
+				filterBy="#{casamento.nome}">
+				<h:outputText value="#{casamento.nome}" />
+
+			</p:column>
+			 
+		 
+			<p:column headerText="Valor:" sortBy="#{casamento.valor}"  
+				filterBy="#{casamento.valor}">
+				<h:outputText value="#{casamento.valor}"  styleClass="menus"/>
+
+			</p:column>
+
+			 
+			<p:column headerText="Descrição:" sortBy="#{casamento.descricao}"  
+				filterBy="#{casamento.descricao}">
+				<h:outputText value="#{casamento.descricao}"  styleClass="menus"/>
+
+			</p:column>
+			
+			<p:column headerText="Status:" sortBy="#{casamento.status}"  
+				filterBy="#{casamento.status}">
+				<h:outputText value="#{casamento.status}"  styleClass="menus"/>
+
+			</p:column>
+			
+			 
+			<p:column headerText="Data Casamento:" sortBy="#{casamento.dataCasamento}"  
+				filterBy="#{casamento.dataCasamento}">
+				<h:outputText value="#{casamento.dataCasamento}"  styleClass="menus">
+				
+				<f:convertDateTime timeZone="GMT-03:00" pattern="dd/MM/yyyy - HH:mm:ss" locale="pt_BR"/>
+				</h:outputText>
+
+			</p:column>
+	 
+			<p:column headerText="Cliente:" sortBy="#{casamento.cliente}"  
+				filterBy="#{casamento.cliente}">
+				<h:outputText value="#{casamento.cliente}"  styleClass="menus"/>
+
+			</p:column>
+
+					<p:column headerText="Opções" exportable="false">
+				<p:commandButton icon="ui-icon-trash" 			
+						actionListener="#{casamentoBean.excluir}" 
+						update=":mensagem :formListagem:tabela">
+						<p:confirm header="Confirmação" message="Deseja excluir o casamento?"
+							icon="ui-icon-alert" />
+						<f:attribute name="clienteSelecionado" value="#{cliente}" />
+					</p:commandButton>
+					 
+					 <p:commandButton icon="ui-icon-pencil"
+						actionListener="#{clienteBean.editar}"
+						update=":mensagem :formCadastro:painel"
+						oncomplete="PF('dialogo').show();">
+						<f:attribute name="clienteSelecionado" value="#{cliente}" />
+						 <f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+				</p:column>
+
+		</p:dataTable>
+		<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+			</p:panel>
+			</h:form>
+		 
+		   
+		<p:dialog header="Casamento - Cadastro" widgetVar="dialogo" 
+		draggable="false" resizable="false"  closable="false">
+		 
+		<h:form id="formCadastro" style="min-width:800px;max-width:900px;min-heigth:900" >
+		<div class="ui-fluid" >
+		 
+			<p:panelGrid columns="2" id="painel" layout="grid"  >
+				<p:outputLabel value="Nome:" for="nome" styleClass="menus"/>
+				<p:inputText id="nome" value="#{clienteBean.cliente.nome}" size="60" maxlength="59" required="true" requiredMessage="O Campo 'Nome' é obrigatório">
+				</p:inputText>
+				
+				 
+				<p:outputLabel value="Telefone:" for="telefone" styleClass="menus"/>
+				<p:inputMask id="telefone" mask="(99)99999-9999" size="12"  
+					value="#{clienteBean.cliente.telefone}" required="true" requiredMessage="O Campo 'Telefone' é obrigatório" >
+				</p:inputMask>
+					
+				
+				<p:outputLabel value="Descrição:" for="des" styleClass="menus"/>
+				<p:inputTextarea id="des"  value="#{clienteBean.cliente.descricao}"    autoResize="60" rows="5" cols="50"   required="true" requiredMessage="O Campo 'Descrição' é obrigatório">
+				</p:inputTextarea>
+				
+				<p:outputLabel value="Data Cadastro:" for="dc" styleClass="menus"/>
+				<p:calendar id="dc" value="#{clienteBean.cliente.dataCadastro}" required="true" requiredMessage="O Campo 'Data Cadastro'  é Obrigatório "> </p:calendar>
+				
+				
+				<p:outputLabel value="Sexo:" for="sexo" styleClass="menus"/>
+				<p:selectOneRadio id="sexo" value="#{clienteBean.cliente.sexo}" required="true" requiredMessage="O Campo 'Sexo'  é Obrigatório "> 
+				<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+				
+			</p:selectOneRadio>
+				 
+			</p:panelGrid>
+		 
+ 
+			 
+</div>
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar" actionListener="#{clienteBean.salvar}" 
+				update=":mensagem :formCadastro:painel :formListagem:tabela"/>
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		</h:form>
+		 
+	</p:dialog>
+		
+		
+		 
+		
+	 
+  		
+		
+		
+ 
+		
+	</ui:define>
+</ui:composition>
+ 

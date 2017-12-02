@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:decorate template="/modelo/modelo.xhtml">
+	<ui:define name="centro">
+	
+	<h:form  id="formCadastro">
+		<p:panel id="pn" header="Newborn">
+			<p:panelGrid columns="2" id="png">
+			
+				<p:outputLabel value="Nome do(a) Responsável:" for="nome" styleClass="menus"/>
+				
+				<p:selectOneMenu id="nome" filter="true"	value="#{clienteBean.cliente.nome}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="O campo 'nome' é obrigatório">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione o Responsável" />
+						<f:selectItems value="#{clienteBean.clientes}" var="cliente"
+							itemValue="#{pessoa}" itemLabel="#{cliente.nome}" />
+					</p:selectOneMenu>
+				 
+				 
+			 
+				 
+				<p:selectOneMenu id="usuario" filter="true"	value="#{clienteBean.cliente.nome}"
+						converter="omnifaces.SelectItemsConverter"  
+						  >
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione ou   "  />
+						<f:selectItems value="#{clienteBean.clientes}" var="cliente"
+							itemValue="#{pessoa}" itemLabel="#{cliente.nome}" />
+							
+					</p:selectOneMenu>	
+							   
+					<p:inputText id="novo"  title="digite o nome do usuário"   
+						value="#{clienteBean.cliente.nomeFotografada}"   placeholder="Digite o nome do Usuário" size="40" maxlength="40" required="true" requiredMessage="O Campo 'Nome' é obrigatório"/>
+				 
+				 <p:outputLabel value="Qnt. de Fotos:" for="fotos" styleClass="menus"/>
+				<p:inputNumber id="fotos" value="#{clienteBean.cliente.descricao}" size="6" maxlength="9" required="true" requiredMessage="O Campo 'Nome' é obrigatório">
+				</p:inputNumber>
+				
+					 <p:outputLabel value="Valor Unitário:" for="vu" styleClass="menus"/>
+				<p:inputNumber id="vu" value="#{clienteBean.cliente.descricao}" size="12" symbol=" R$"  symbolPosition="s"  maxlength="10" required="true" requiredMessage="O Campo 'Nome' é obrigatório">
+				 </p:inputNumber>
+				
+				<p:outputLabel value="Descrição:" for="des" styleClass="menus"/>
+				<p:inputTextarea id="des"  value="#{clienteBean.cliente.descricao}"    autoResize="60" rows="5" cols="50"   required="true" requiredMessage="O Campo 'Descrição' é obrigatório">
+				</p:inputTextarea>
+				
+				<p:outputLabel value="Data Cadastro:" for="dc" styleClass="menus"/>
+				<p:calendar id="dc" value="#{fotoBean.foto.data}" required="true" requiredMessage="O Campo 'Data  '  é Obrigatório "   size="10" />
+				
+				 <p:outputLabel value="Local "  for="local" styleClass="menus"/>
+				 <p:inputText id="local" value="#{fotoBean.foto.local}" required="true" requiredMessage="o campo 'Local' é  Obrigatório" size="16" maxlength="25" />
+				 
+				  <p:outputLabel value="Total  "  for="total" styleClass="menus"/>
+				 <p:inputText id="total"   size="9"/>
+				 
+				<p:commandButton value="Salvar " title="Salvar  "
+					action="#{fotoBean.salvar}"   update=":formCadastro:pn "/>
+			</p:panelGrid>
+		</p:panel>
+</h:form>
+
+	</ui:define>
+</ui:decorate>
+</html>

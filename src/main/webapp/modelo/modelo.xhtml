@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f = "http://java.sun.com/jsf/core" 
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+        <meta http-equiv="Content-Type" name="viewport" content="text/html; charset=UTF-8" />
+        <title>Agenda</title>
+        
+       <h:outputStylesheet library="css" name="estilos.css" />
+       <h:outputScript name="scripts.js" library="js" />
+    </h:head>
+    <h:body styleClass="borda" >
+     
+     <p:growl id="mensagem" />
+        <div  id="geral" class="Geral">
+            <p:layout fullPage="true" >  
+                <p:layoutUnit position="north" size="134" resizable="false" >  
+                    <h:graphicImage url="/resources/imagens/agenda.png" 	styleClass="centralizada"/>
+                </p:layoutUnit>  
+ 
+                <p:layoutUnit position="west" size="244" resizable="false" closable="false" collapsible="false">  
+                    <ui:insert name="menu">
+                        <h:form>
+                        
+                            <p:menu style="width: 200px"  >
+                                <p:submenu label="Menu" styleClass="menus">
+                                    <p:menuitem value="Home" icon="ui-icon-home" title="Principal" url="/modelo/modelo.xhtml"   />
+                                    <p:menuitem value=" Cadastrar Cliente" icon="ui-icon-plus" title="Cadastrar Cliente" url="/pagina/cliente.xhtml"/>
+                                    <p:menuitem value=" Pesquisar Cliente" icon="ui-icon-zoomout" title="Pesquisar Cliente" url="/pagina/ListaCliente.xhtml"/>
+                                    <p:menuitem value="Criar Login" icon="ui-icon-plus" title="Criar Login para Usúario" url="/pagina/usuario.xhtml"  rendered="#{autenticarUsuarioBean.usuarioLogado.tipoDeUsuario != 'USUARIO'}"/>          
+                                </p:submenu>
+                                   <p:submenu label="Orçamento" styleClass="menus">
+                                    <p:menuitem value="Evento" icon="ui-icon-folder-open" title="fotos tirada no estúdio" url="/pagina/estudio.xhtml"/>                                    
+                                
+                                    <p:menuitem value="Casamento..." icon="ui-icon-folder-open" title="Casamento, 15 anos, Gestante , Sensual!" url="/pagina/casamento.xhtml"/>
+                                    <p:menuitem value="Newborn" icon="ui-icon-folder-open" url="/pagina/newborn.xhtml"/>          
+                                </p:submenu>
+                                <p:submenu label="Relatório" styleClass="menus">
+                                    <p:menuitem value="relatório de cliente"    title="relatório"  />
+                                </p:submenu>
+                                <p:submenu label="Arquivo" styleClass="menus">
+                                <p:menuitem value="Alterar Senha" url="/pagina/alterarSenha.xhtml"  />
+                                    <p:menuitem value="Logar"  icon="ui-icon-person" title="Logar no Sistema" url="/pagina/login.xhtml"/>
+                                    <p:menuitem value="Sair" icon="ui-icon-close" title="Sair" url="/pagina/login.xhtml"/>   
+                                          
+                                </p:submenu>
+                            </p:menu>
+                        </h:form>
+                    </ui:insert>
+                </p:layoutUnit>  
+                <p:layoutUnit position="center" styleClass="cor">  
+                    <ui:insert name="centro" >
+<h1 class="h1">  Sistema de Agenda para trabalho</h1><hr/>
+ <span class="sistema"> Este modelo permite a um gestor controlar os seus trabalhos.<br/>
+  Organiza-se por projeto com datas de entrega com base nas tarefas relacionadas com a conclusão dos trabalhos   </span>
+                        
+                        
+                                 <div class="div">
+
+ <script language="javascript" type="text/javascript" >
+now = new Date;
+document.write ( "Horário de Brasília, "  + now.getHours() + ":" + now.getMinutes());
+
+</script>
+                
+
+                
+            </div>
+                    </ui:insert>
+                </p:layoutUnit>  
+            </p:layout>  
+        </div>
+    </h:body>
+</html>
